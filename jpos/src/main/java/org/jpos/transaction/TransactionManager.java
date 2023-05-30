@@ -763,11 +763,11 @@ public class TransactionManager
     }
 
     protected void initStatusListeners (Element config)  throws ConfigurationException{
-        final Iterator<Element> iter = config.getChildren ("status-listener").iterator();
+        final Iterator iter = config.getChildren ("status-listener").iterator();
         while (iter.hasNext()) {
-            final Element e = iter.next();
+            final Element e = (Element) iter.next();
             final QFactory factory = getFactory();
-            final TransactionStatusListener listener = factory.newInstance (QFactory.getAttributeValue (e, "class"));
+            final TransactionStatusListener listener = (TransactionStatusListener) factory.newInstance (QFactory.getAttributeValue (e, "class"));
             factory.setConfiguration (listener, config);
             addListener(listener);
         }
@@ -960,7 +960,7 @@ public class TransactionManager
     protected void recover (int session, long id) {
         LogEvent evt = getLog().createLogEvent ("recover");
         Profiler prof = new Profiler();
-        evt.addMessage ("id", Long.toString(id));
+        evt.addMessage ("<id>" + id + "</id>");
         try {
             String stateKey   = getKey (STATE, id);
             String contextKey = getKey (CONTEXT, id);
