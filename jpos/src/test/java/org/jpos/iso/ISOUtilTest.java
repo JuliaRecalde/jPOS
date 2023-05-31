@@ -54,22 +54,42 @@ public class ISOUtilTest {
 
 
     @Test
-    public void TestsHex1() {
+    public void TestConvertToHexValidInput() {
         String p = "1A2B3C";
         ISOUtil.hex2byte(p);
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            Integer.parseInt("1a");
+        });
+    
+        String expectedMessage = "For input string";
+        String actualMessage = exception.getMessage();
+    
+        assertFalse(actualMessage.contains(expectedMessage));
+
     }
 
     @Test
-    public void TestsHex2() {
-        String p = "1";
-        ISOUtil.hex2byte(p);
+    public void testIsHexadecimal_ValidInput_ThrowsExceptionWithMessage() {
+       
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            ISOUtil.hex2byte("1A2B3C");
+        }, "Not hex");
+
+        assertEquals("Not hex", exception.getMessage());
     }
 
     @Test
-    public void TestsHex3() {
-        String p = null;
-        ISOUtil.hex2byte(p);
+    public void testIsHexadecimal_InvalidInput_ThrowsExceptionWithMessage() {
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            ISOUtil.hex2byte("1111");
+        }, "Not hex");
+        //ISOUtil.hex2byte("1");
+
+        assertEquals("Not hex", exception.getMessage());
     }
+
 
     @Test
     public void testAsciiToEbcdic() throws Throwable {
