@@ -51,24 +51,6 @@ import org.junit.jupiter.api.Test;
 public class ISOUtilTest {
     final String lineSep = System.getProperty("line.separator");
 
-
-
-    @Test
-    public void TestConvertToHexValidInput() {
-        String p = "1A2B3C";
-        ISOUtil.hex2byte(p);
-
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            Integer.parseInt("1a");
-        });
-    
-        String expectedMessage = "For input string";
-        String actualMessage = exception.getMessage();
-    
-        assertFalse(actualMessage.contains(expectedMessage));
-
-    }
-
     @Test
     public void testIsHexadecimal_ValidInput_ThrowsExceptionWithMessage() {
        
