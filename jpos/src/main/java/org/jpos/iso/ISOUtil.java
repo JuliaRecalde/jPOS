@@ -182,18 +182,6 @@ public class ISOUtil {
         return padleft(s, len, '0');
     }
    
-    public static boolean isHexadecimal(byte[] bytes) {
-        for (byte b : bytes) {
-            int unsignedByte = b & 0xFF;
-            if (!((unsignedByte >= 0x30 && unsignedByte <= 0x39) ||  // Dígitos 0-9
-                  (unsignedByte >= 0x41 && unsignedByte <= 0x46) ||  // Letras A-F
-                  (unsignedByte >= 0x61 && unsignedByte <= 0x66))) {  // Letras a-f
-                return false;
-            }
-        }
-        return true;
-    }
-    
     /**
      * zeropads a long without throwing an ISOException (performs modulus operation)
      *
@@ -699,7 +687,7 @@ public class ISOUtil {
 
         if (s.isEmpty() || s.length() % 2 != 0) //verificar si el string es vacio
         {
-            throw new IllegalArgumentException("The string is empty or null");
+            throw new IllegalArgumentException("The string is empty or null, invalid hexadecimal");
         }
         // Verificar si cada carácter es un dígito hexadecimal válido
         for (int i = 0; i < s.length(); i++) {
