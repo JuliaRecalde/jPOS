@@ -699,7 +699,7 @@ public class ISOUtil {
 
         if (s.isEmpty() || s.length() % 2 != 0) //verificar si el string es vacio
         {
-            throw new IllegalArgumentException("The string is empty or null");
+            throw new IllegalArgumentException("The string is empty or null, invalid hexadecimal");
         }
         // Verificar si cada carácter es un dígito hexadecimal válido
         for (int i = 0; i < s.length(); i++) {
