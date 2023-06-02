@@ -54,7 +54,7 @@ public class ISOUtilTest {
     @Test
     public void testIsHexadecimal_ValidInput_ThrowsExceptionWithMessage() {
        
-        Exception exception = assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ISOUtil.hex2byte("1A2B3C");
         }, "Not hex");
 
@@ -67,7 +67,6 @@ public class ISOUtilTest {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             ISOUtil.hex2byte("1111");
         }, "Not hex");
-        //ISOUtil.hex2byte("1");
 
         assertEquals("Not hex", exception.getMessage());
     }
@@ -83,7 +82,7 @@ public class ISOUtilTest {
     @Test
     public void testAsciiToEbcdic1() throws Throwable {
         byte[] a = new byte[1];
-        byte[] result = c.asciiToEbcdic(a);
+        byte[] result = ISOUtil.asciiToEbcdic(a);
         assertEquals(1, result.length, "result.length");
         assertEquals((byte) 0, result[0], "result[0]");
     }
