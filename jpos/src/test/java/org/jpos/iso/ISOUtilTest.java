@@ -51,20 +51,17 @@ import org.junit.jupiter.api.Test;
 public class ISOUtilTest {
     final String lineSep = System.getProperty("line.separator");
 
-    @Test
-    public void testIsHexadecimal_ValidInput_ThrowsExceptionWithMessage() {
-       
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            ISOUtil.hex2byte("1A2B3C");
-        }, "Not hex");
 
-        assertEquals("Not hex", exception.getMessage());
+    
+    @Test
+    public void testIsHexadecimal_ValidInput_ThrowsExceptionWithMessage() throws Throwable {
+        ISOUtil.hex2byte("1A2B3C");
     }
 
     @Test
     public void testIsHexadecimal_InvalidInput_ThrowsExceptionWithMessage() {
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ISOUtil.hex2byte("1111");
         }, "Not hex");
 
